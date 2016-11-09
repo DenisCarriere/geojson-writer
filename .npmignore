@@ -12,3 +12,4 @@ CHANGELOG.md
 .travis.yml
 providers.yml
 tmp
+fixtures
