@@ -1,6 +1,6 @@
 {
   "name": "geojson-helpers",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Helps read & write GeoJSON files based on RFC 7946 GeoJSON",
   "main": "index.js",
   "jsnext:main": "index.js",
@@ -23,8 +23,6 @@
   },
   "homepage": "https://github.com/DenisCarriere/geojson-helpers#readme",
   "devDependencies": {
-    "@types/node": "^6.0.45",
-    "@types/geojson": "0.0.31",
     "ava": "^0.16.0",
     "coveralls": "^2.11.14",
     "documentation": "^4.0.0-beta11",
@@ -32,7 +30,10 @@
     "tslint": "^3.15.1",
     "typescript": "^2.0.8"
   },
-  "dependencies": { },
+  "dependencies": {
+    "@types/node": "^6.0.45",
+    "@types/geojson": "0.0.31"
+  },
   "keywords": [
     "gis",
     "geo",
