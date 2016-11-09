@@ -31,3 +31,29 @@ geojson.writeFileSync('new-places.geojson', featureCollection, ['name', 'name:en
 - Compact indentation, 1 line per feature (smallest file size possible)
 - Limits coordinates decimals to a maximum of 6
 - Does not include CRS
+# writeFileSync
+
+Writes GeoJSON file
+
+**Parameters**
+
+-   `path` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `geojson` **FeatureCollection** GeoJSON FeatureCollection
+-   `properties` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;([string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number))>** 
+
+# readFileSync
+
+Reads GeoJSON file
+
+**Parameters**
+
+-   `path` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** File must be a GeoJSON FeatureCollection
+
+# Changelog
+
+## 0.1.0 - 2016-11-09
+
+Begining of project `geojson-helpers`.
+Features:
+- readFileSync
+- writeFileSync
