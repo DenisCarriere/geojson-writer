@@ -5,7 +5,7 @@
 
 # GeoJSON Helpers
 
-Helps read & write GeoJSON FeatureCollection files.
+Helps read & write GeoJSON files based on [RFC 7946 GeoJSON](http://www.macwright.org/2016/11/07/the-geojson-ietf-standard.html).
 
 ## Install
 
@@ -25,9 +25,8 @@ geojson.writeFileSync('new-places.geojson', featureCollection)
 
 ## Features
 
-- Reads '.geojson'
-- Outputs Feature Collection
-- Write file uses buffer
+- Reads GeoJSON files
+- Writes GeoJSON files
 - Compact indentation, 1 line per feature (smallest file size possible)
 - Limits coordinates decimals to a maximum of 6
 - Does not include CRS
