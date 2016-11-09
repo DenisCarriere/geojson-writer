@@ -3,6 +3,13 @@ logs
 *.log
 npm-debug.log*
 
+yarn.lock
+
+*.js
+*.js.map
+
+providers.json
+
 # Runtime data
 pids
 *.pid

@@ -1,0 +1,13 @@
+test
+test*
+coverage
+documentation.yml
+yarn.lock
+tsconfig.json
+tslint.json
+HEADER.md
+CHANGELOG.md
+.nyc_output
+.vscode
+.travis.yml
+providers.yml

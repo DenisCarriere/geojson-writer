@@ -1,0 +1,3 @@
+paths:
+  GeoJSON: "http://geojson.org/geojson-spec.html"
+  BBox: "http://geojson.org/geojson-spec.html#bounding-boxes"
