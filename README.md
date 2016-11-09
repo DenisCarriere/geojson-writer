@@ -20,7 +20,7 @@ import geojson from 'geojson-helpers'
 
 const featureCollection = geojson.readFileSync('places.geojson')
 // <--Data processing-->
-geojson.writeFileSync('new-places.geojson', featureCollection, ['name', 'name:en', 'place'])
+geojson.writeFileSync('new-places.geojson', featureCollection)
 ```
 
 ## Features
@@ -39,7 +39,7 @@ Writes GeoJSON file
 
 -   `path` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 -   `geojson` **FeatureCollection** GeoJSON FeatureCollection
--   `properties` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;([string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number))>** 
+-   `properties` **\[[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;([string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number))>]** Only include the following properties
 
 # readFileSync
 

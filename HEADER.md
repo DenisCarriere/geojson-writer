@@ -20,7 +20,7 @@ import geojson from 'geojson-helpers'
 
 const featureCollection = geojson.readFileSync('places.geojson')
 // <--Data processing-->
-geojson.writeFileSync('new-places.geojson', featureCollection, ['name', 'name:en', 'place'])
+geojson.writeFileSync('new-places.geojson', featureCollection)
 ```
 
 ## Features

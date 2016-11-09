@@ -8,7 +8,7 @@ export type FeatureCollection = GeoJSON.FeatureCollection<GeoJSON.GeometryObject
  *
  * @param {string} path
  * @param {FeatureCollection} geojson GeoJSON FeatureCollection
- * @param {Array<string|number>} properties
+ * @param {Array<string|number>} [properties] Only include the following properties
  */
 export function writeFileSync(path: string, geojson: FeatureCollection, properties?: Array<string | number>): void {
   mkdir(path)
@@ -75,3 +75,7 @@ export default {
   readFileSync,
   writeFileSync,
 }
+
+const fc = readFileSync('./fixtures/Point.geojson')
+fc.features = fc.features.filter(feature => feature.properties.foo)
+console.log(fc)
