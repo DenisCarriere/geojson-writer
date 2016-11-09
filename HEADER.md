@@ -5,7 +5,7 @@
 
 # GeoJSON Helpers
 
-Helps read & write GeoJSON files.
+Helps read & write GeoJSON FeatureCollection files.
 
 ## Install
 
@@ -18,8 +18,9 @@ $ npm install --save geojson-helpers
 ```javascript
 import geojson from 'geojson-helpers'
 
-const featureCollection = geojson.readFileSync('dataset.geojson')
-geojson.writeFileSync('export.geojson', featureCollection)
+const featureCollection = geojson.readFileSync('places.geojson')
+// <--Data processing-->
+geojson.writeFileSync('new-places.geojson', featureCollection, ['name', 'name:en', 'place'])
 ```
 
 ## Features

@@ -4,7 +4,7 @@ logs
 npm-debug.log*
 
 yarn.lock
-
+tmp
 *.js
 *.js.map
 

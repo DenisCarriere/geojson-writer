@@ -25,6 +25,7 @@
   "homepage": "https://github.com/DenisCarriere/geojson-helpers#readme",
   "devDependencies": {
     "@types/node": "^6.0.45",
+    "@types/geojson": "0.0.31",
     "ava": "^0.16.0",
     "coveralls": "^2.11.14",
     "documentation": "^4.0.0-beta11",
@@ -32,9 +33,7 @@
     "tslint": "^3.15.1",
     "typescript": "^2.0.8"
   },
-  "dependencies": {
-    "@types/geojson": "0.0.31"
-  },
+  "dependencies": { },
   "keywords": [
     "gis",
     "geo",

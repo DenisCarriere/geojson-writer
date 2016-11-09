@@ -11,3 +11,4 @@ CHANGELOG.md
 .vscode
 .travis.yml
 providers.yml
+tmp
