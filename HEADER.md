@@ -31,3 +31,4 @@ geojson.writeFileSync('new-places.geojson', featureCollection)
 - Compact indentation, 1 line per feature (smallest file size possible)
 - Limits coordinates decimals to a maximum of 6
 - Does not include CRS
+
