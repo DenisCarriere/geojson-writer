@@ -75,7 +75,3 @@ export default {
   readFileSync,
   writeFileSync,
 }
-
-const fc = readFileSync('./fixtures/Point.geojson')
-fc.features = fc.features.filter(feature => feature.properties.foo)
-console.log(fc)
