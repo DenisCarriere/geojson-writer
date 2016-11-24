@@ -15,7 +15,7 @@ export function writeFileSync(path: string, geojson: FeatureCollection, properti
   const stream = fs.createWriteStream(path)
   writeHeader(stream)
   geojson.features.map((feature, index, array) => {
-    if (pick) { feature.properties = pick(feature.properties, properties) }
+    if (properties !== undefined) { feature.properties = pick(feature.properties, properties) }
     feature.geometry.coordinates = toFix(feature.geometry.coordinates)
     writeFeature(stream, feature, index, array)
   })
@@ -59,11 +59,11 @@ function toFix(array: Array<any>): Array<any> {
 }
 
 function pick(object: any, keys: Array<string | number>): any {
-  const properties: any = {}
+  const container: any = {}
   Object.keys(object).map(key => {
-    if (keys.indexOf(key) !== -1) { properties[key] = object[key] }
+    if (keys.indexOf(key) !== -1) { container[key] = object[key] }
   })
-  return properties
+  return container
 }
 
 function writeFeature(stream: fs.WriteStream, feature: any, index: number, array: Array<any>): void {
