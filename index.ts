@@ -31,8 +31,9 @@ export function writeFileSync(path: string, geojson: FeatureCollection, properti
 export function removeEmptyProperties(feature: GeoJSON.Feature<any>) {
   const properties: any = {}
   Object.keys(feature.properties).map(key => {
-    if (feature.properties[key] !== undefined) {
-      properties[key] = feature.properties[key]
+    const value = feature.properties[key]
+    if (value !== undefined && value !== '' && value !== null) {
+      properties[key] = value
     }
   })
   feature.properties = properties
