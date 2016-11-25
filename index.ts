@@ -17,9 +17,26 @@ export function writeFileSync(path: string, geojson: FeatureCollection, properti
   geojson.features.map((feature, index, array) => {
     if (properties !== undefined) { feature.properties = pick(feature.properties, properties) }
     feature.geometry.coordinates = toFix(feature.geometry.coordinates)
+    feature = removeEmptyProperties(feature)
     writeFeature(stream, feature, index, array)
   })
   writeFooter(stream)
+}
+
+/**
+ * Remove Empty values
+ *
+ * @param {GeoJSON.Feature<any>} feature
+ */
+export function removeEmptyProperties(feature: GeoJSON.Feature<any>) {
+  const properties: any = {}
+  Object.keys(feature.properties).map(key => {
+    if (feature.properties[key] !== undefined) {
+      properties[key] = feature.properties[key]
+    }
+  })
+  feature.properties = properties
+  return feature
 }
 
 /**
