@@ -1,14 +1,15 @@
 import * as path from 'path'
-import test from 'ava'
-import geojson from './index'
+import * as fs from 'fs'
+import {reader, writer} from './'
 
-test('readFileSync', t => {
-  const features = geojson.readFileSync(path.join(__dirname, 'fixtures', 'Point.geojson'))
-  t.true(!!features)
+describe('reader', () => {
+  const features = reader(path.join(__dirname, 'fixtures', 'Point.geojson'))
+  test('read', () => expect(features).toBeDefined())
 })
 
-test('writeFileSync', t => {
-  const features = geojson.readFileSync(path.join(__dirname, 'fixtures', 'Point.geojson'))
-  geojson.writeFileSync(path.join(__dirname, 'tmp', 'Point.geojson'), features, ['foo'])
-  t.true(!!features)
+describe('writer', () => {
+  const destination = path.join(__dirname, 'tmp', 'Point.geojson')
+  const features = reader(path.join(__dirname, 'fixtures', 'Point.geojson'))
+  writer(destination, features, {properties: ['foo']})
+  test('write', () => expect(fs.existsSync(destination)).toBeTruthy())
 })

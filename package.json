@@ -1,14 +1,15 @@
 {
-
   "name": "geojson-writer",
-  "version": "0.3.1",
+  "version": "0.3.0",
   "description": "Reads & writes GeoJSON files based on RFC 7946 GeoJSON",
   "main": "index.js",
   "jsnext:main": "index.js",
   "scripts": {
-    "test": "npm run lint && nyc ava",
-    "docs": "tsc && cat HEADER.md > README.md && documentation build index.js -c documentation.yml -f md --shallow >> README.md && cat CHANGELOG.md >> README.md",
-    "lint": "tsc && tslint index.ts test.ts && documentation lint index.js"
+    "test": "npm run lint && jest --coverage",
+    "docs": "tsc && documentation readme index.js -c documentation.yml --section=API --shallow",
+    "lint": "tsc && tslint *.ts && documentation lint index.js",
+    "browserify": "browserify ./examples/main.js -o ./examples/browserify/bundle.js",
+    "webpack": "webpack --entry ./examples/main.js --output-path ./examples/webpack --output-filename bundle.js"
   },
   "repository": {
     "type": "git",
@@ -24,16 +25,18 @@
   },
   "homepage": "https://github.com/DenisCarriere/geojson-helpers#readme",
   "devDependencies": {
-    "ava": "^0.16.0",
-    "coveralls": "^2.11.14",
-    "documentation": "^4.0.0-beta11",
-    "nyc": "^8.3.2",
-    "tslint": "^3.15.1",
-    "typescript": "^2.0.8"
+    "@types/jest": "^16.0.4",
+    "browserify": "^13.3.0",
+    "coveralls": "^2.11.15",
+    "documentation": "^4.0.0-beta.18",
+    "jest-cli": "^18.1.0",
+    "tslint": "^4.3.1",
+    "typescript": "^2.1.5",
+    "webpack": "^1.14.0"
   },
   "dependencies": {
-    "@types/node": "^6.0.45",
-    "@types/geojson": "0.0.31"
+    "@types/geojson": "0.0.32",
+    "@types/node": "^7.0.1"
   },
   "keywords": [
     "gis",
@@ -43,12 +46,7 @@
     "geography",
     "geojson"
   ],
-  "ava": {
-    "files": [
-      "test.js"
-    ],
-    "concurrency": 5,
-    "failFast": true,
-    "tap": true
+  "jest": {
+    "verbose": true
   }
 }
