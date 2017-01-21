@@ -13,12 +13,15 @@ interface Options {
 /**
  * Writes GeoJSON file
  *
- * @param {string} path
+ * @param {string} path File path
  * @param {Features} geojson GeoJSON FeatureCollection
- * @param {Array<string|number>} [properties] Only include the following properties
+ * @param {Options} options Options
+ * @param {number} [options.precision=6] Reduce coordinate precision
+ * @param {boolean} [options.boolean=false] Drop Z coordinates
+ * @param {Array<string|number>} [options.properties] Only include the following properties
  * @returns {void}
  */
-export function writeFileSync(path: string, geojson: Features, options?: Options): void {
+export function writer(path: string, geojson: Features, options?: Options): void {
   // Define options
   const properties = options.properties
   const precision = options.precision || 6
@@ -69,7 +72,7 @@ export function removeEmptyProperties(feature: Feature) {
  * @param {string} path File must be a GeoJSON FeatureCollection
  * @returns {Features} GeoJSON FeatureCollection
  */
-export function readFileSync(path: string): Features {
+export function reader(path: string): Features {
   return JSON.parse(fs.readFileSync(path, 'utf-8'))
 }
 
@@ -88,19 +91,25 @@ function writeFooter(stream: fs.WriteStream) {
   stream.write(']\n}\n')
 }
 
-function writeFeatureEnd(stream: fs.WriteStream, index: number, array: Array<any>): void {
+function writeFeatureEnd(stream: fs.WriteStream, index: number, array: any[]): void {
   if (index + 1 !== array.length) { stream.write(',\n')
   } else { stream.write('\n') }
 }
 
-function toFix(array: Array<any>, precision = 6): Array<any> {
+/**
+ * Reduce coordinate precision
+ */
+function toFix(array: any[], precision = 6): any[] {
   return array.map(value => {
     if (typeof(value) === 'object') { return toFix(value) }
     return Number(value.toFixed(precision))
   })
 }
 
-function dropZ(array: Array<any>): Array<any> {
+/**
+ * Drop Z coordinate
+ */
+function dropZ(array: any[]): any[] {
   return array.map(value => {
     if (typeof(value) === 'object' && typeof(value[0]) === 'object') {
       return dropZ(value)
@@ -109,6 +118,9 @@ function dropZ(array: Array<any>): Array<any> {
   })
 }
 
+/**
+ * Pick
+ */
 function pick(object: any, keys: Array<string | number>): any {
   const container: any = {}
   Object.keys(object).map(key => {
@@ -117,12 +129,15 @@ function pick(object: any, keys: Array<string | number>): any {
   return container
 }
 
-function writeFeature(stream: fs.WriteStream, feature: any, index: number, array: Array<any>): void {
+/**
+ * Write Feature
+ */
+function writeFeature(stream: fs.WriteStream, feature: any, index: number, array: any[]): void {
   stream.write(JSON.stringify(feature))
   writeFeatureEnd(stream, index, array)
 }
 
 export default {
-  readFileSync,
-  writeFileSync,
+  writer,
+  reader,
 }
