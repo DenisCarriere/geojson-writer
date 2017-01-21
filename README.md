@@ -1,9 +1,10 @@
-[![Build Status](https://travis-ci.org/DenisCarriere/geojson-helpers.svg?branch=master)](https://travis-ci.org/DenisCarriere/geojson-helpers)
-[![Coverage Status](https://coveralls.io/repos/github/DenisCarriere/geojson-helpers/badge.svg?branch=master)](https://coveralls.io/github/DenisCarriere/geojson-helpers?branch=master)
-[![npm version](https://badge.fury.io/js/geojson-helpers.svg)](https://badge.fury.io/js/geojson-helpers)
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/DenisCarriere/geojson-helpers/master/LICENSE)
+# [GeoJSON Writer](https://www.npmjs.com/package/geojson-writer)
 
-# GeoJSON Writer
+[![Build Status](https://travis-ci.org/DenisCarriere/geojson-writer.svg?branch=master)](https://travis-ci.org/DenisCarriere/geojson-writer)
+[![Circle CI](https://circleci.com/gh/DenisCarriere/geojson-writer.svg?style=svg)](https://circleci.com/gh/DenisCarriere/geojson-writer)
+[![Coverage Status](https://coveralls.io/repos/github/DenisCarriere/geojson-writer/badge.svg?branch=master)](https://coveralls.io/github/DenisCarriere/geojson-writer?branch=master)
+[![npm version](https://badge.fury.io/js/geojson-writer.svg)](https://badge.fury.io/js/geojson-writer)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/DenisCarriere/geojson-writer/master/LICENSE)
 
 Reads & writes GeoJSON files based on [RFC 7946 GeoJSON](http://www.macwright.org/2016/11/07/the-geojson-ietf-standard.html).
 
@@ -16,35 +17,39 @@ $ npm install --save geojson-writer
 ## Quickstart
 
 ```javascript
-import * as geojson from 'geojson-writer'
+import {writer, reader} from 'geojson-writer'
 
-const featureCollection = geojson.readFileSync('places.geojson')
+const data = reader('places.geojson')
 // <--Data processing-->
-geojson.writeFileSync('new-places.geojson', featureCollection)
+writer('places-processed.geojson', data)
 ```
 
 ## Features
 
-- Reads GeoJSON files
-- Writes GeoJSON files
-- Compact indentation, 1 line per feature (smallest file size possible)
-- Limits coordinates decimals to a maximum of 6
-- Does not include CRS
+-   Reads GeoJSON files
+-   Writes GeoJSON files
+-   Compact indentation, 1 line per feature (smallest file size possible)
+-   Limits coordinates decimals to a maximum of 6
+-   Does not include CRS
 
-# writeFileSync
+## API
+
+### writer
 
 Writes GeoJSON file
 
 **Parameters**
 
--   `path` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `path` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** File path
 -   `geojson` **Features** GeoJSON FeatureCollection
--   `properties` **\[[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;([string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number))>]** Only include the following properties
--   `options`  
+-   `options` **Options** Options
+    -   `options.precision` **\[[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)]** Reduce coordinate precision (optional, default `6`)
+    -   `options.boolean` **\[[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)]** Drop Z coordinates (optional, default `false`)
+    -   `options.properties` **\[[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;([string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number))>]** Only include the following properties
 
 Returns **void** 
 
-# removeEmptyProperties
+### removeEmptyProperties
 
 Remove Empty values
 
@@ -52,15 +57,7 @@ Remove Empty values
 
 -   `feature` **Feature** 
 
-# removeEmptyProperties
-
-Remove Empty values
-
-**Parameters**
-
--   `feature` **GeoJSON.Feature&lt;any>** 
-
-# readFileSync
+### reader
 
 Reads GeoJSON file
 
@@ -70,22 +67,39 @@ Reads GeoJSON file
 
 Returns **Features** GeoJSON FeatureCollection
 
-# Changelog
-## 0.3.0 - 2017-01-09
+### toFix
 
-- Renamed library to `geojson-writer`
+Reduce coordinate precision
 
-## 0.2.0 - 2016-11-25
+**Parameters**
 
-- Remove empty properties when saving GeoJSON
+-   `array`  
+-   `precision`   (optional, default `6`)
 
-## 0.2.0 - 2016-11-25
+### dropZ
 
-- Remove empty properties when saving GeoJSON
+Drop Z coordinate
 
-## 0.1.0 - 2016-11-09
+**Parameters**
 
-Begining of project `geojson-helpers`.
+-   `array`  
 
-- readFileSync
-- writeFileSync
+### pick
+
+Pick
+
+**Parameters**
+
+-   `object`  
+-   `keys`  
+
+### writeFeature
+
+Write Feature
+
+**Parameters**
+
+-   `stream`  
+-   `feature`  
+-   `index`  
+-   `array`  
