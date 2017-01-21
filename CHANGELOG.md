@@ -1,5 +1,8 @@
 
 # Changelog
+## 0.3.0 - 2017-01-09
+
+- Renamed library to `geojson-writer`
 
 ## 0.3.0 - 2017-01-21
 

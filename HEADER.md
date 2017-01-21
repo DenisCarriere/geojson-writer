@@ -3,20 +3,20 @@
 [![npm version](https://badge.fury.io/js/geojson-helpers.svg)](https://badge.fury.io/js/geojson-helpers)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/DenisCarriere/geojson-helpers/master/LICENSE)
 
-# GeoJSON Helpers
+# GeoJSON Writer
 
-Helps read & write GeoJSON files based on [RFC 7946 GeoJSON](http://www.macwright.org/2016/11/07/the-geojson-ietf-standard.html).
+Reads & writes GeoJSON files based on [RFC 7946 GeoJSON](http://www.macwright.org/2016/11/07/the-geojson-ietf-standard.html).
 
 ## Install
 
 ```bash
-$ npm install --save geojson-helpers
+$ npm install --save geojson-writer
 ```
 
 ## Quickstart
 
 ```javascript
-import geojson from 'geojson-helpers'
+import * as geojson from 'geojson-writer'
 
 const featureCollection = geojson.readFileSync('places.geojson')
 // <--Data processing-->
