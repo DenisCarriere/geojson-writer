@@ -38,8 +38,19 @@ Writes GeoJSON file
 **Parameters**
 
 -   `path` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
--   `geojson` **FeatureCollection** GeoJSON FeatureCollection
+-   `geojson` **Features** GeoJSON FeatureCollection
 -   `properties` **\[[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;([string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number))>]** Only include the following properties
+-   `options`  
+
+Returns **void** 
+
+# removeEmptyProperties
+
+Remove Empty values
+
+**Parameters**
+
+-   `feature` **Feature** 
 
 # readFileSync
 
@@ -49,7 +60,13 @@ Reads GeoJSON file
 
 -   `path` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** File must be a GeoJSON FeatureCollection
 
+Returns **Features** GeoJSON FeatureCollection
+
 # Changelog
+
+## 0.2.0 - 2016-11-25
+
+- Remove empty properties when saving GeoJSON
 
 ## 0.1.0 - 2016-11-09
 

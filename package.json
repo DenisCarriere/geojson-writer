@@ -1,6 +1,6 @@
 {
   "name": "geojson-helpers",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Helps read & write GeoJSON files based on RFC 7946 GeoJSON",
   "main": "index.js",
   "jsnext:main": "index.js",

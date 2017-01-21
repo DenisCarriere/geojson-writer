@@ -1,23 +1,46 @@
 import { resolve, dirname } from 'path'
 import * as fs from 'fs'
 
-export type FeatureCollection = GeoJSON.FeatureCollection<GeoJSON.GeometryObject>
+export type Features = GeoJSON.FeatureCollection<any>
+export type Feature = GeoJSON.Feature<any>
+
+interface Options {
+  properties?: Array<string | number>
+  precision?: number
+  z?: boolean
+}
 
 /**
  * Writes GeoJSON file
  *
  * @param {string} path
- * @param {FeatureCollection} geojson GeoJSON FeatureCollection
+ * @param {Features} geojson GeoJSON FeatureCollection
  * @param {Array<string|number>} [properties] Only include the following properties
+ * @returns {void}
  */
-export function writeFileSync(path: string, geojson: FeatureCollection, properties?: Array<string | number>): void {
+export function writeFileSync(path: string, geojson: Features, options?: Options): void {
+  // Define options
+  const properties = options.properties
+  const precision = options.precision || 6
+  const z = options.z
+
   mkdir(path)
   const stream = fs.createWriteStream(path)
   writeHeader(stream)
   geojson.features.map((feature, index, array) => {
+    // Include specifici attributes
     if (properties !== undefined) { feature.properties = pick(feature.properties, properties) }
-    feature.geometry.coordinates = toFix(feature.geometry.coordinates)
+
+    // Reduce coordinates precision
+    feature.geometry.coordinates = toFix(feature.geometry.coordinates, precision)
+
+    // Drop z Coordinates
+    if (z) { feature.geometry.coordinates = dropZ(feature.geometry.coordinates) }
+
+    // Remove empty properties
     feature = removeEmptyProperties(feature)
+
+    // Write
     writeFeature(stream, feature, index, array)
   })
   writeFooter(stream)
@@ -26,9 +49,9 @@ export function writeFileSync(path: string, geojson: FeatureCollection, properti
 /**
  * Remove Empty values
  *
- * @param {GeoJSON.Feature<any>} feature
+ * @param {Feature} feature
  */
-export function removeEmptyProperties(feature: GeoJSON.Feature<any>) {
+export function removeEmptyProperties(feature: Feature) {
   const properties: any = {}
   Object.keys(feature.properties).map(key => {
     const value = feature.properties[key]
@@ -44,8 +67,9 @@ export function removeEmptyProperties(feature: GeoJSON.Feature<any>) {
  * Reads GeoJSON file
  *
  * @param {string} path File must be a GeoJSON FeatureCollection
+ * @returns {Features} GeoJSON FeatureCollection
  */
-export function readFileSync(path: string): FeatureCollection {
+export function readFileSync(path: string): Features {
   return JSON.parse(fs.readFileSync(path, 'utf-8'))
 }
 
@@ -69,10 +93,19 @@ function writeFeatureEnd(stream: fs.WriteStream, index: number, array: Array<any
   } else { stream.write('\n') }
 }
 
-function toFix(array: Array<any>): Array<any> {
+function toFix(array: Array<any>, precision = 6): Array<any> {
   return array.map(value => {
     if (typeof(value) === 'object') { return toFix(value) }
-    return Number(value.toFixed(6))
+    return Number(value.toFixed(precision))
+  })
+}
+
+function dropZ(array: Array<any>): Array<any> {
+  return array.map(value => {
+    if (typeof(value) === 'object' && typeof(value[0]) === 'object') {
+      return dropZ(value)
+    }
+    return [value[0], value[1]]
   })
 }
 
