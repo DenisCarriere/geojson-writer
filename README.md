@@ -4,6 +4,7 @@
 [![Circle CI](https://circleci.com/gh/DenisCarriere/geojson-writer.svg?style=svg)](https://circleci.com/gh/DenisCarriere/geojson-writer)
 [![Coverage Status](https://coveralls.io/repos/github/DenisCarriere/geojson-writer/badge.svg?branch=master)](https://coveralls.io/github/DenisCarriere/geojson-writer?branch=master)
 [![npm version](https://badge.fury.io/js/geojson-writer.svg)](https://badge.fury.io/js/geojson-writer)
+[![Known Vulnerabilities](https://snyk.io/test/github/deniscarriere/geojson-writer/badge.svg)](https://snyk.io/test/github/deniscarriere/geojson-writer)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/DenisCarriere/geojson-writer/master/LICENSE)
 
 Reads & writes GeoJSON files based on [RFC 7946 GeoJSON](http://www.macwright.org/2016/11/07/the-geojson-ietf-standard.html).
