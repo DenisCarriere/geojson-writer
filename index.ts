@@ -7,7 +7,7 @@ export type Features = GeoJSON.FeatureCollection<any>
 export type Feature = GeoJSON.Feature<any>
 
 interface Options {
-  properties?: Array<string | number>
+  properties?: string[]
   precision?: number
   z?: boolean
 }
@@ -18,12 +18,13 @@ interface Options {
  * @param {string} path File path
  * @param {Features} geojson GeoJSON FeatureCollection
  * @param {Options} options Options
+ * @param {string[]} [options.properties] List of properties to include in GeoJSON
  * @param {number} [options.precision=6] Reduce coordinate precision
  * @param {boolean} [options.boolean=false] Drop Z coordinates
  * @param {Array<string|number>} [options.properties] Only include the following properties
  * @returns {void}
  */
-export function writer(path: string, geojson: Features, options?: Options): void {
+export function writer(path: string, geojson: Features, options: Options = {}): void {
   // Define options
   const properties = options.properties
   const precision = options.precision || 6

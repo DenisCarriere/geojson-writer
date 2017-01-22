@@ -43,7 +43,8 @@ Writes GeoJSON file
 
 -   `path` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** File path
 -   `geojson` **Features** GeoJSON FeatureCollection
--   `options` **Options** Options
+-   `options` **\[Options](default {})** Options
+    -   `options.properties` **\[[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)>]** List of properties to include in GeoJSON
     -   `options.precision` **\[[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)]** Reduce coordinate precision (optional, default `6`)
     -   `options.boolean` **\[[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)]** Drop Z coordinates (optional, default `false`)
     -   `options.properties` **\[[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;([string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number))>]** Only include the following properties
@@ -76,23 +77,6 @@ Reduce coordinate precision
 
 -   `array`  
 -   `precision`   (optional, default `6`)
-
-### dropZ
-
-Drop Z coordinate
-
-**Parameters**
-
--   `array`  
-
-### pick
-
-Pick
-
-**Parameters**
-
--   `object`  
--   `keys`  
 
 ### writeFeature
 
