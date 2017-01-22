@@ -36,7 +36,8 @@
   },
   "dependencies": {
     "@types/geojson": "0.0.32",
-    "@types/node": "^7.0.1"
+    "@types/node": "^7.0.1",
+    "deep-slice": "^1.0.0"
   },
   "keywords": [
     "gis",

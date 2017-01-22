@@ -1,5 +1,7 @@
 import { resolve, dirname } from 'path'
+import * as deepSlice from 'deep-slice'
 import * as fs from 'fs'
+import {pick} from './utils'
 
 export type Features = GeoJSON.FeatureCollection<any>
 export type Feature = GeoJSON.Feature<any>
@@ -38,7 +40,7 @@ export function writer(path: string, geojson: Features, options?: Options): void
     feature.geometry.coordinates = toFix(feature.geometry.coordinates, precision)
 
     // Drop z Coordinates
-    if (z) { feature.geometry.coordinates = dropZ(feature.geometry.coordinates) }
+    if (z) { feature.geometry.coordinates = deepSlice(feature.geometry.coordinates, 0, 2) }
 
     // Remove empty properties
     feature = removeEmptyProperties(feature)
@@ -104,29 +106,6 @@ function toFix(array: any[], precision = 6): any[] {
     if (typeof(value) === 'object') { return toFix(value) }
     return Number(value.toFixed(precision))
   })
-}
-
-/**
- * Drop Z coordinate
- */
-function dropZ(array: any[]): any[] {
-  return array.map(value => {
-    if (typeof(value) === 'object' && typeof(value[0]) === 'object') {
-      return dropZ(value)
-    }
-    return [value[0], value[1]]
-  })
-}
-
-/**
- * Pick
- */
-function pick(object: any, keys: Array<string | number>): any {
-  const container: any = {}
-  Object.keys(object).map(key => {
-    if (keys.indexOf(key) !== -1) { container[key] = object[key] }
-  })
-  return container
 }
 
 /**
