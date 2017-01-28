@@ -1,10 +1,11 @@
 {
   "name": "geojson-writer",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "Reads & writes GeoJSON files based on RFC 7946 GeoJSON",
   "main": "index.js",
   "jsnext:main": "index.js",
   "scripts": {
+    "prepublish": "tsc",
     "test": "npm run lint && jest --coverage",
     "docs": "tsc && documentation readme index.js -c documentation.yml --section=API --shallow",
     "lint": "tsc && tslint *.ts && documentation lint index.js",
