@@ -91,7 +91,7 @@ function writeHeader(stream: fs.WriteStream) {
 }
 
 function writeFooter(stream: fs.WriteStream) {
-  stream.write(']\n}\n')
+  stream.write(']\n}')
 }
 
 function writeFeatureEnd(stream: fs.WriteStream, index: number, array: any[]): void {

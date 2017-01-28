@@ -1,6 +1,6 @@
 {
   "name": "geojson-writer",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "Reads & writes GeoJSON files based on RFC 7946 GeoJSON",
   "main": "index.js",
   "jsnext:main": "index.js",
