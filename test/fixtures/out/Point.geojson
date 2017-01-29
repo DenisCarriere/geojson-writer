@@ -1,0 +1,6 @@
+{
+"type": "FeatureCollection",
+"features": [
+{"type":"Feature","properties":{"foo":"bar"},"geometry":{"type":"Point","coordinates":[-85.078125,51.618017]}}
+]
+}

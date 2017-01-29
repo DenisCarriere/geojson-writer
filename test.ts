@@ -2,14 +2,27 @@ import * as path from 'path'
 import * as fs from 'fs'
 import {reader, writer} from './'
 
+// Define Directories
+const directories = {
+  in: path.join(__dirname, 'test', 'fixtures', 'in'),
+  out: path.join(__dirname, 'test', 'fixtures', 'out'),
+}
+// Define Fixtures
+const fixtures = {
+  point: {
+    in: path.join(directories.in, 'Point.geojson'),
+    out: path.join(directories.out, 'Point.geojson'),
+  },
+}
+
 describe('reader', () => {
-  const features = reader(path.join(__dirname, 'fixtures', 'Point.geojson'))
+  const features = reader(fixtures.point.in)
   test('read', () => expect(features).toBeDefined())
 })
 
 describe('writer', () => {
-  const destination = path.join(__dirname, 'tmp', 'Point.geojson')
-  const features = reader(path.join(__dirname, 'fixtures', 'Point.geojson'))
-  writer(destination, features, {properties: ['foo']})
-  test('write', () => expect(fs.existsSync(destination)).toBeTruthy())
+  test('write', async () => {
+    writer(fixtures.point.out, reader(fixtures.point.in), {properties: ['foo']})
+    expect(fs.existsSync(fixtures.point.out)).toBeTruthy()
+  })
 })
