@@ -20,8 +20,7 @@ interface Options {
  * @param {Options} options Options
  * @param {string[]} [options.properties] List of properties to include in GeoJSON
  * @param {number} [options.precision=6] Reduce coordinate precision
- * @param {boolean} [options.boolean=false] Drop Z coordinates
- * @param {Array<string|number>} [options.properties] Only include the following properties
+ * @param {boolean} [options.z=false] Drop Z coordinates
  * @returns {void}
  */
 export function writer(path: string, geojson: Features, options: Options = {}): void {
@@ -33,14 +32,14 @@ export function writer(path: string, geojson: Features, options: Options = {}): 
   mkdir(path)
   const stream = fs.createWriteStream(path)
   writeHeader(stream)
-  geojson.features.map((feature, index, array) => {
-    // Include specifici attributes
+  geojson.features.map((feature: any, index: number, array: any[]) => {
+    // Include specific attributes
     if (properties !== undefined) { feature.properties = pick(feature.properties, properties) }
 
-    // Reduce coordinates precision
+    // Reduce coordinate precision
     feature.geometry.coordinates = toFix(feature.geometry.coordinates, precision)
 
-    // Drop z Coordinates
+    // Drop Z coordinates
     if (z) { feature.geometry.coordinates = deepSlice(feature.geometry.coordinates, 0, 2) }
 
     // Remove empty properties
